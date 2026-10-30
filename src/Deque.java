@@ -20,39 +20,64 @@ public class Deque<Item> implements Iterable<Item> {
 
     /** Construct an empty deque. */
     public Deque() {
+        head = new Node();
+        tail = new Node();
+        size=0;
         // TODO: Initialize an empty linked list.
     }
 
     /** Return whether the deque is empty. */
     public boolean isEmpty() {
-        // TODO: Report whether this linked list contains no items.
-        return false;
+        if (size == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /** Return the number of items in the deque. */
     public int size() {
         // TODO: Return this linked list's item count.
-        return 0;
+        return size;
     }
 
     /** Add an item to the front; reject null items with IllegalArgumentException. */
     public void addFirst(Item item) {
+        Node temp = new Node();
+        temp.item = item;
+        Node a = head;
+        temp.next = a;
+        head = temp;
+        size++;
+
         // TODO: Create a node and link it at the front; update head/tail pointers.
     }
 
     /** Add an item to the back; reject null items with IllegalArgumentException. */
     public void addLast(Item item) {
+        Node temp = new Node();
+        temp.item = item;
+        Node a = tail;
+        tail.next = a;
+        tail = a;
+        size++;
         // TODO: Create a node and link it at the back; update head/tail pointers.
     }
 
     /** Remove and return the front item; throw NoSuchElementException if empty. */
     public Item removeFirst() {
+        if (size >= 1) {
+            head = head.next;
+        }
         // TODO: Remove the front node and update head/tail pointers.
         return null;
     }
 
     /** Remove and return the back item; throw NoSuchElementException if empty. */
     public Item removeLast() {
+        if (size >= 1) {
+            tail.prev = tail;
+        }
         // TODO: Remove the back node and update head/tail pointers.
         return null;
     }
