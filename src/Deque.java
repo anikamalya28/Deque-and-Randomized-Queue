@@ -45,7 +45,8 @@ public class Deque<Item> implements Iterable<Item> {
     public void addFirst(Item item) {
         Node temp = new Node();
         temp.item = item;
-        Node a = head;
+        Node a = new Node();
+        a = head;
         temp.next = a;
         head = temp;
         size++;
@@ -84,10 +85,78 @@ public class Deque<Item> implements Iterable<Item> {
 
     /** Return an iterator from front to back; next() and remove() follow the specified exceptions. */
     @Override
+    /*
     public Iterator<Item> iterator() {
+
         // TODO: Return an iterator that follows next links from head to tail.
         return null;
     }
+    */
+
+    public Iterator<Item> iterator() {
+        /**
+         * Returns an iterator that traverses the queue from head to tail.
+         * The iterator reflects the state of the queue at the time it is created;
+         * modifications to the queue after the iterator is created may produce
+         * unpredictable results.
+         *
+         * @return a head-to-tail Iterator over the elements of type Item
+         */
+        return (new Iterator<Item>() {
+            Node pos = new Node();
+            pos = head;
+            private int count = 0;
+
+            /**
+             * Returns true if the iteration has more elements.
+             * In other words, returns true if a subsequent call to next()
+             * would return an element rather than throwing an exception.
+             *
+             * @return true if there are more elements to iterate over, false otherwise
+             */
+            public boolean hasNext() {
+                if (pos.next == null) {
+                    return false;
+                } else {
+                    return true;
+                }
+                //TODO Implement the hasNext() method
+            }
+
+            /**
+             * Returns the next element in the iteration, advancing the iterator
+             * one position toward the tail of the queue.
+             *
+             * @return the next Item in head-to-tail order
+             * @throws java.util.NoSuchElementException if the iteration has no more elements
+             */
+
+            public Item next() {
+                /*
+                Item item = items[pos];
+                pos++;
+                if (pos == items.length) {
+                    pos = 0;
+                }
+                count++;
+                */
+                return pos.next;
+                //TODO Implement the next() method
+                /*
+                Item item = items[0];
+                if (hasNext()) {
+                    item = items[pos+1];
+                    pos++;
+                    count++;
+                }
+                return item;
+                 */
+
+            }
+        });
+    }
+
+
 
     private class DequeIterator implements Iterator<Item>{
         private Node current = head.next;
